@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration</title>
+    </head>
+    
+    <body>
+        <style>
+            label.error {
+                border: 2px solid red;
+                border-radius: 4px;
+                line-height: 1;
+                padding: 2px 0 6px 6px;
+                background: #ffe6eb;
+            }
+           
+        </style>
+        <div class="registration-form">
+            <h3>Registration Form</h3>
+          <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%></p>
+          <form id="reg-form" method="post" action="register">
+         
+       
+            <% for (var i = 0; i < input_fields.length; i++) { %>
+                 
+                 <div class="form-container">
+                    <label><%= input_fields[i].label %></label> : 
+                    <div>
+                        <input type="<%= input_fields[i].type %>" autocomplete="off" <%= input_fields[i].required_front %> value="<%= (data && data[input_fields[i].name]) ? data[input_fields[i].name] : '' ;%>"  placeholder="<%= input_fields[i].label %>" name="<%= input_fields[i].name %>" >
+                    </div>
+                   <% if(error && error[input_fields[i].name]) { %> <label  class="error" for="<%= error[input_fields[i].name].name %>"><%= error[input_fields[i].name].message %></label>   <% } %>    
+                 </div>
+            <% } %>
+         
+            <br> 
+          <input type="submit" id="submit"  value="Register Now" />
+         
+          </form>
+          </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script>
+           $(document).ready(function() {
+            $('#submit').attr('disabled', true); 
+            $("#reg-form").validate({
+               
+                onfocusout: function(element) {
+                    this.element(element);
+                    this.checkForm();
+
+                    if (this.valid()) { // checks form for validity
+                        $('#submit').attr('disabled', false);        // enables button
+                    } else {
+                        $('#submit').attr('class', true);   // disables button
+                    }
+                },
+               
+            });
+            })
+            // $('input').on('blur keyup', function() {
+            //     if ($("#myform").valid()) {
+            //         $('#submit').prop('disabled', false);  
+            //     } else {
+            //         $('#submit').prop('disabled', 'disabled');
+            //     }
+            // });
+        </script>
+       
+    </body>
+</html>
