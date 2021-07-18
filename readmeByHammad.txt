@@ -1,0 +1,5 @@
+- used cypress.io for test cases
+- use command  node_modules\.bin\cypress open    to run cypress node_modules
+- created a Registration Form from Json Returning from App.js with front end and backend validation
+- route and its functions are stored in ./routes/route-controller.js
+- views are stored in ./view/
